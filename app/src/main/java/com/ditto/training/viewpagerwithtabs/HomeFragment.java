@@ -21,6 +21,14 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public static HomeFragment newInstance(int pos,String title){
+        HomeFragment homeFragment = new HomeFragment();
+        Bundle args = new Bundle();
+        args.putInt("position",pos);
+        args.putString("title",title);
+        homeFragment.setArguments(args);
+        return homeFragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,7 +36,8 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         tvFragment = view.findViewById(R.id.tv_home);
-        tvFragment.setText(getArguments().getString("Message"));
+        //tvFragment.setText(String.valueOf(getArguments().getInt("position")));
+        tvFragment.setText(getArguments().getString("title"));
         return view;
     }
 

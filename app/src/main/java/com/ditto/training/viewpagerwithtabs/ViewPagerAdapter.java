@@ -8,13 +8,18 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import java.util.ArrayList;
+
 public class ViewPagerAdapter extends FragmentPagerAdapter{
 
     private static int count = 0;
+    private static ArrayList<String> myData;
 
-    public static ViewPagerAdapter newInstance(FragmentManager fm,int numOfFragments){
+
+    public static ViewPagerAdapter newInstance(FragmentManager fm, ArrayList data){
         ViewPagerAdapter vP = new ViewPagerAdapter(fm);
-        count = numOfFragments;
+        myData = data;
+        count = data.size();
         return vP;
     }
 
@@ -27,24 +32,24 @@ public class ViewPagerAdapter extends FragmentPagerAdapter{
     @Override
     public Fragment getItem(int position) {
         Fragment fragmentku = null;
-        position = position+1;
+        if(myData.get(position).equals("Favourite")){
+            fragmentku = new FavoriteFragment();
+        }
+        else{
+           fragmentku = HomeFragment.newInstance(position,myData.get(position));
+        }
+
         return fragmentku;
     }
 
     @Override
     public int getCount() {
-        return 2;
+        return count;
     }
 
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        switch (position){
-            case 0:
-                return "Home";
-            case 1:
-                return "Favorite";
-        }
-        return null;
+        return myData.get(position);
     }
 }

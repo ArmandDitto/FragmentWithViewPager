@@ -7,6 +7,8 @@ import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     private ViewPager viewPagerku;
@@ -18,8 +20,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ArrayList<String> data = new ArrayList<>();
+        data.add("Dittoons");
+        data.add("Favourite");
+        data.add("Genre");
+        data.add("Downloads");
+        data.add("Popular");
+        data.add("Create Ur Oun");
+
         viewPagerku = findViewById(R.id.view_pager);
-        viewPagerAdapterku = ViewPagerAdapter.newInstance(getSupportFragmentManager(),2);
+        viewPagerAdapterku = ViewPagerAdapter.newInstance(getSupportFragmentManager(),data);
         viewPagerku.setAdapter(viewPagerAdapterku  );
 
         tabLayoutku = findViewById(R.id.tab_ku);
